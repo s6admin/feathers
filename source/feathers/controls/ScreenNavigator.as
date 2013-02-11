@@ -153,6 +153,13 @@ package feathers.controls
 		public var transition:Function = defaultTransition;
 
 		/**
+		 * Flags if the ScreenNavigator should automatically resize its content.
+		 * This is a StageSelectStudios specified parameter that alters how the original ScreenNavigator was designed.
+		 * Default is 'true'.
+		 **/
+		public var resizeContent:Boolean = true;
+		
+		/**
 		 * @private
 		 */
 		protected var _screens:Object = {};
@@ -396,7 +403,8 @@ package feathers.controls
 
 			if(sizeInvalid || selectionInvalid)
 			{
-				if(this._activeScreen)
+				// Content resizing is being made toggleable in cases where the displayed content has dimensions larger than the device display (ie. in-game elements that enter and leave the screen)
+				if(this._activeScreen && resizeContent)
 				{
 					this._activeScreen.width = this.actualWidth;
 					this._activeScreen.height = this.actualHeight;
